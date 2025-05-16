@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barnet FC BA Workshop</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+        }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .sidebar-link {
+            display: block;
+            padding: 0.75rem 1.25rem;
+            border-radius: 0.375rem;
+            transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+        }
+        .sidebar-link:hover {
+            background-color: #e0f2fe; /* light sky blue */
+            color: #0c4a6e; /* darker sky blue */
+        }
+        .sidebar-link.active {
+            background-color: #0ea5e9; /* sky blue 500 */
+            color: white;
+            font-weight: 600;
+        }
+        .card {
+            background-color: white;
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: 10% auto; /* 10% from the top and centered */
+            padding: 25px;
+            border: 1px solid #888;
+            width: 80%; /* Could be more or less, depending on screen size */
+            max-width: 600px;
+            border-radius: 0.5rem;
+            position: relative;
+        }
+        .close-button {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        /* Accordion styles */
+        .accordion-header {
+            cursor: pointer;
+            padding: 1rem;
+            background-color: #f3f4f6; /* gray-100 */
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-radius: 0.375rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .accordion-content {
+            display: none;
+            padding: 1rem;
+            border: 1px solid #e5e7eb; /* gray-200 */
+            border-top: none;
+            border-radius: 0 0 0.375rem 0.375rem;
+            background-color: #fafafa; /* slightly off-white */
+        }
+        .accordion-content.open {
+            display: block;
+        }
+        .timer-container {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #1f2937; /* gray-800 */
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+            z-index: 50;
+            text-align: center;
+        }
+        .timer-display {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+        }
+        .timer-controls button {
+            background-color: #3b82f6; /* blue-500 */
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.375rem;
+            margin: 0 0.25rem;
+            cursor: pointer;
+        }
+        .timer-controls button:hover {
+            background-color: #2563eb; /* blue-600 */
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <div class="flex flex-col md:flex-row min-h-screen">
+        <aside class="w-full md:w-64 bg-white shadow-lg p-6 space-y-2 sticky top-0 h-screen md:overflow-y-auto">
+            <h1 class="text-2xl font-bold text-sky-600 mb-6">Barnet FC Workshop</h1>
+            <nav>
+                <a href="#" class="sidebar-link active" onclick="showTab('home', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
+                    Home
+                </a>
+                <a href="#" class="sidebar-link" onclick="showTab('scenario', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm2 6a1 1 0 011-1h6a1 1 0 110 2H7a1 1 0 01-1-1zm1 3a1 1 0 100 2h6a1 1 0 100-2H7z" clip-rule="evenodd" /></svg>
+                    Scenario
+                </a>
+                <a href="#" class="sidebar-link" onclick="showTab('pestle', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z" /></svg>
+                    PESTLE Analysis
+                </a>
+                <a href="#" class="sidebar-link" onclick="showTab('stakeholder', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zm-3 2a5 5 0 00-5 5v1a1 1 0 001 1h8a1 1 0 001-1v-1a5 5 0 00-5-5H6zm6.707-2.293a.997.997 0 000-1.414L12 1.586l-.707-.707a.999.999 0 10-1.414 1.414L10.586 3l-.707.707a.999.999 0 101.414 1.414L12 4.414l.707.707a.999.999 0 101.414-1.414L13.414 3l.707-.707zM17 11a5 5 0 00-5-5h-1a.998.998 0 000 2h1a3 3 0 110 6h-1a.998.998 0 000 2h1a5 5 0 005-5v-1a.998.998 0 00-1-1h-.001zm-1 .001a3.001 3.001 0 11-6 0 3.001 3.001 0 016 0z" /></svg>
+                    Stakeholder Analysis
+                </a>
+                 <a href="#" class="sidebar-link" onclick="openTwistModal()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" /></svg>
+                    Reveal Twist!
+                </a>
+                <a href="#" class="sidebar-link" onclick="showTab('catwoe', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" /></svg>
+                    CATWOE Analysis
+                </a>
+                <a href="#" class="sidebar-link" onclick="showTab('presentations', this)">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v2a2 2 0 100 4v2a2 2 0 01-2 2H4a2 2 0 01-2-2V6zm2.707 2.707a1 1 0 000 1.414L6.414 12l-1.707 1.707a1 1 0 001.414 1.414L8 13.414l1.293 1.293a1 1 0 001.414-1.414L9.414 12l1.707-1.707a1 1 0 00-1.414-1.414L8 10.586 6.707 9.293a1 1 0 00-1.414 0zM14 11a1 1 0 100-2 1 1 0 000 2z" /></svg>
+                    Presentations & Wrap-up
+                </a>
+            </nav>
+        </aside>
+
+        <main class="flex-1 p-6 md:p-10 overflow-y-auto">
+            <div id="home" class="tab-content active">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Welcome to the Barnet FC Homecoming BA Workshop!</h2>
+                    <p class="text-lg mb-3">This interactive session is designed to give you hands-on experience applying key Business Analysis frameworks to a realistic scenario.</p>
+                    <p class="text-lg font-semibold mb-2">Workshop Goal:</p>
+                    <p class="mb-4">To collaboratively analyze Barnet FC's planned return to their home borough, using PESTLE, Stakeholder Analysis, and CATWOE, fostering critical thinking and shared learning.</p>
+                    <hr class="my-6">
+                    <h3 class="text-2xl font-semibold text-sky-600 mb-3">Today's Game Plan (Agenda)</h3>
+                    <ul class="list-disc list-inside space-y-2 mb-4">
+                        <li>Introduction & Team Formation (5 mins)</li>
+                        <li>Section 1: External Environment – PESTLE Analysis (30 mins)</li>
+                        <li>Section 2: Understanding the Players – Stakeholder Analysis (25 mins)</li>
+                        <li>Section 3: Deep Dive – CATWOE Analysis (30 mins)</li>
+                        <li>Team Presentations & Discussion (15 mins)</li>
+                        <li>Wrap-up & Key Learnings (5 mins)</li>
+                    </ul>
+                    <button class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('scenario', document.querySelector('a[onclick*=\'scenario\']'))">
+                        Let's Get Started: View Scenario
+                    </button>
+                </div>
+            </div>
+
+            <div id="scenario" class="tab-content">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">The Scenario: Barnet FC – The Bees' Return</h2>
+                    <p class="mb-3">Barnet FC, affectionately known as "The Bees," boasts a rich history, having played at their iconic Underhill Stadium in the London Borough of Barnet for 106 years. In 2013, due to various constraints with Underhill, the club relocated to The Hive Stadium in the neighboring borough of Harrow. While The Hive has served as a functional home, the emotional and historical ties to Barnet remain strong amongst the fanbase and local community.</p>
+                    <p class="mb-3">After a decade away, Barnet FC's leadership has announced an ambitious strategic initiative: to return to the London Borough of Barnet by developing a new, purpose-built stadium. This project, with an estimated budget of £25 million and a proposed 3-year timeline, is more than just a construction project; it's a symbol of homecoming, community regeneration, and a new chapter for the club, which currently competes in the National League (the fifth tier of English football).</p>
+                    <p class="mb-3">The move is fraught with complexities: securing planning permissions, community engagement, financial viability, managing supporter expectations, and ensuring the new stadium meets modern standards while respecting the club's heritage. Success will depend on meticulous planning, robust analysis, and effective stakeholder management.</p>
+                    <h3 class="text-xl font-semibold mt-6 mb-2">Project Snapshot:</h3>
+                    <ul class="list-disc list-inside space-y-1">
+                        <li><strong>Budget:</strong> £25 million</li>
+                        <li><strong>Timeline:</strong> 3 years</li>
+                        <li><strong>Current League:</strong> National League (5th tier)</li>
+                    </ul>
+                     <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('pestle', document.querySelector('a[onclick*=\'pestle\']'))">
+                        Next: PESTLE Analysis
+                    </button>
+                </div>
+            </div>
+
+            <div id="pestle" class="tab-content">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Section 1: PESTLE Analysis (30 mins)</h2>
+                    <p class="text-lg mb-3"><strong>Objective:</strong> To identify and analyze the key external macro-environmental factors that could influence Barnet FC's stadium relocation project.</p>
+                    <p class="mb-4"><strong>Your Task:</strong> In your teams, brainstorm and document factors under each PESTLE category. Identify at least 2-3 distinct factors per category, explaining their potential impact. Use your flip chart or digital whiteboard.</p>
+                    
+                    <div class="space-y-3">
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-semibold text-lg">P - Political</span>
+                                <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span> </div>
+                            <div class="accordion-content">
+                                <p class="font-medium mb-1">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                    <li>How might local council elections or changes in political leadership impact planning permissions?</li>
+                                    <li>What national government policies on sports infrastructure or funding could affect the project?</li>
+                                </ul>
+                                <p class="font-medium text-red-600">Challenging Factor:</p>
+                                <p class="text-sm text-red-500">A newly elected local council has a manifesto commitment to prioritize social housing over large leisure developments.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-semibold text-lg">E - Economic</span>
+                                <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
+                            </div>
+                            <div class="accordion-content">
+                                <p class="font-medium mb-1">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                    <li>How might the current economic climate (inflation, construction costs) impact the £25 million budget?</li>
+                                    <li>What are potential economic benefits for the local Barnet area?</li>
+                                </ul>
+                                <p class="font-medium text-red-600">Challenging Factor:</p>
+                                <p class="text-sm text-red-500">A major local employer announces significant layoffs, reducing disposable income.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-semibold text-lg">S - Social</span>
+                                <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
+                            </div>
+                            <div class="accordion-content">
+                                <p class="font-medium mb-1">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                    <li>What is the current sentiment of the Barnet community towards the club's return?</li>
+                                    <li>How might demographic shifts influence stadium design/services?</li>
+                                    <li>Are there concerns about disruption, traffic, or noise?</li>
+                                </ul>
+                                <p class="font-medium text-red-600">Challenging Factor:</p>
+                                <p class="text-sm text-red-500">A vocal residents' group emerges, concerned about impact on local parkland.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-semibold text-lg">T - Technological</span>
+                                <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
+                            </div>
+                            <div class="accordion-content">
+                                <p class="font-medium mb-1">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                    <li>What modern stadium technologies should be considered (cashless, Wi-Fi, sustainability)?</li>
+                                    <li>How can technology enhance fan engagement?</li>
+                                </ul>
+                                <p class="font-medium text-red-600">Challenging Factor:</p>
+                                <p class="text-sm text-red-500">The proposed site has poor existing digital infrastructure.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-semibold text-lg">L - Legal</span>
+                                <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
+                            </div>
+                            <div class="accordion-content">
+                                <p class="font-medium mb-1">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                    <li>What are key planning permission requirements and potential legal hurdles?</li>
+                                    <li>Are there specific safety/accessibility regulations for new sports venues?</li>
+                                </ul>
+                                <p class="font-medium text-red-600">Challenging Factor:</p>
+                                <p class="text-sm text-red-500">An ancient right of way is discovered across a section of the proposed land.</p>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <div class="accordion-header" onclick="toggleAccordion(this)">
+                                <span class="font-semibold text-lg">E - Environmental</span>
+                                <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
+                            </div>
+                            <div class="accordion-content">
+                                <p class="font-medium mb-1">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                    <li>What are environmental considerations (green building, waste, wildlife)?</li>
+                                    <li>How can the club demonstrate commitment to sustainability?</li>
+                                </ul>
+                                <p class="font-medium text-red-600">Challenging Factor:</p>
+                                <p class="text-sm text-red-500">The proposed site is adjacent to a protected nature reserve.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('stakeholder', document.querySelector('a[onclick*=\'stakeholder\']'))">
+                        Next: Stakeholder Analysis
+                    </button>
+                </div>
+            </div>
+
+            <div id="stakeholder" class="tab-content">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Section 2: Stakeholder Analysis (25 mins)</h2>
+                    <p class="text-lg mb-3"><strong>Objective:</strong> To identify key stakeholders, understand their perspectives, and prioritize them based on their influence and interest.</p>
+                    <p class="mb-1"><strong>Activity Steps:</strong></p>
+                    <ol class="list-decimal list-inside space-y-1 mb-4">
+                        <li>Review the Stakeholder Personas below.</li>
+                        <li>Map each stakeholder on an Interest/Influence Grid (use your provided template or draw one).</li>
+                        <li>Prioritize: Identify your Top 3 Critical Stakeholders.</li>
+                        <li>Briefly discuss engagement approaches for these top 3.</li>
+                    </ol>
+
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">Stakeholder Personas:</h3>
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">1. Sarah Chen (Local Resident)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Quiet neighborhood, property values, minimal disruption.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Noise, parking, anti-social behavior.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">2. David Miller (Barnet FC CEO)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Successful relocation, financial viability, club legacy.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Budget overruns, delays, negative PR.</p>
+                            <p class="text-sm"><strong>Influence:</strong> High.</p>
+                        </div>
+                         <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">3. Cllr. James Wilson (Barnet Council Leader)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Economic regeneration, job creation, positive council image.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Public backlash, project failure, strain on services.</p>
+                            <p class="text-sm"><strong>Influence:</strong> High.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">4. Mark Jenkins (Long-time Season Ticket Holder)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Club returning home, match-day experience, club success.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Ticket prices, stadium atmosphere, accessibility.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">5. Fatima Ahmed (Local Business Owner)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Increased footfall, new customers.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Increased local business rates, construction disruption.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Low-Medium.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">6. John Bishop (Motorway Services Action Group)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Smooth traffic flow, minimal congestion.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Match-day traffic overwhelming local roads.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        </div>
+                         <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">7. Maria Sanchez (National League Rep)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Compliance with ground grading, club stability.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Project delays, club financial health.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">8. Kevin Beale (Construction PM)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Project on time/budget, reputation.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Unforeseen conditions, supply chain, scope creep.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">9. "The Barnet Buzz" (Fan Forum Mod)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Transparency, fan consultation.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Club not listening, mismanagement.</p>
+                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        </div>
+                        <div class="p-4 border rounded-lg bg-slate-100">
+                            <h4 class="font-bold">10. Eleanor Hayes (Environmental Officer)</h4>
+                            <p class="text-sm"><strong>Interests:</strong> Protecting ecology, sustainable development.</p>
+                            <p class="text-sm"><strong>Concerns:</strong> Impact on wildlife, pollution, waste.</p>
+                            <p class="text-sm"><strong>Influence:</strong> High.</p>
+                        </div>
+                    </div>
+                    <h3 class="text-xl font-semibold text-sky-600 mt-6 mb-3">Interest/Influence Grid:</h3>
+                    <p class="mb-2">Use your handout or draw a 2x2 grid. Label axes "Interest" (Low to High) and "Influence" (Low to High). Plot stakeholders into: </p>
+                    <ul class="list-disc list-inside space-y-1 mb-4 text-sm">
+                        <li><strong>High Influence / High Interest:</strong> Manage Closely</li>
+                        <li><strong>High Influence / Low Interest:</strong> Keep Satisfied</li>
+                        <li><strong>Low Influence / High Interest:</strong> Keep Informed</li>
+                        <li><strong>Low Influence / Low Interest:</strong> Monitor</li>
+                    </ul>
+                    <p class="font-semibold">Remember to identify your Top 3 critical stakeholders for the next section!</p>
+                     <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="openTwistModal()">
+                        Ready for a Twist?
+                    </button>
+                    <button class="mt-6 ml-4 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('catwoe', document.querySelector('a[onclick*=\'catwoe\']'))">
+                        Proceed to CATWOE Analysis
+                    </button>
+                </div>
+            </div>
+
+            <div id="catwoe" class="tab-content">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Section 3: CATWOE Analysis (30 mins)</h2>
+                    <p class="text-lg mb-3"><strong>Objective:</strong> To analyze the perspectives and needs of your Top 3 critical stakeholders, providing deeper understanding for requirements elicitation.</p>
+                    <p class="mb-4"><strong>Your Task:</strong> For EACH of your Top 3 stakeholders identified in the previous section, conduct a CATWOE analysis using your template/whiteboard.</p>
+
+                    <h3 class="text-xl font-semibold text-sky-600 mb-3">The CATWOE Framework:</h3>
+                    <ul class="space-y-2 mb-4">
+                        <li><strong>C (Customers/Clients):</strong> Who benefits or suffers from the transformation (from this stakeholder's POV)?</li>
+                        <li><strong>A (Actors):</strong> Who carries out the activities in the transformation (from this stakeholder's POV)?</li>
+                        <li><strong>T (Transformation Process):</strong> What's the core change? (Input -> Output, e.g., undeveloped land -> community asset).</li>
+                        <li><strong>W (Weltanschauung/Worldview):</strong> What's the stakeholder's core belief making this meaningful? (e.g., "Barnet FC belongs in Barnet").</li>
+                        <li><strong>O (Owners):</strong> Who has ultimate authority to approve/stop it (from this stakeholder's POV)?</li>
+                        <li><strong>E (Environmental Constraints):</strong> What external factors impact it? (Link to PESTLE).</li>
+                    </ul>
+                    <h4 class="font-semibold mb-2">Example Questions (for David Miller, Barnet FC CEO):</h4>
+                    <ul class="list-disc list-inside text-sm space-y-1 mb-4">
+                        <li><strong>C:</strong> Who ultimately benefits if this relocation is a success from his perspective? Who suffers if it fails?</li>
+                        <li><strong>W:</strong> What's his core belief driving this? ("A new stadium is essential for the club's long-term survival and growth").</li>
+                    </ul>
+                     <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('presentations', document.querySelector('a[onclick*=\'presentations\']'))">
+                        Next: Presentations & Wrap-up
+                    </button>
+                </div>
+            </div>
+
+            <div id="presentations" class="tab-content">
+                <div class="card">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Team Presentations & Discussion (15 mins)</h2>
+                    <p class="text-lg mb-3">Each team will have 3-4 minutes to share key insights.</p>
+                    <h3 class="text-xl font-semibold text-sky-600 mb-2">Presentation Focus:</h3>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>1 key PESTLE insight.</li>
+                        <li>Your Top 3 critical stakeholders and why.</li>
+                        <li>Key insights from one CATWOE analysis.</li>
+                        <li>One major challenge or "aha!" moment (and impact of the twist, if applicable).</li>
+                    </ul>
+
+                    <h3 class="text-xl font-semibold text-sky-600 mt-6 mb-2">Discussion Prompts:</h3>
+                    <ul class="list-disc list-inside space-y-1 mb-4">
+                        <li>What were the most common critical stakeholders identified? Why?</li>
+                        <li>Which PESTLE factor seemed most impactful across teams?</li>
+                        <li>How do these analyses help in a real project?</li>
+                    </ul>
+                    <hr class="my-6">
+                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Wrap-up & Key Learnings (5 mins)</h2>
+                     <ul class="list-disc list-inside space-y-1">
+                        <li>Recap of frameworks: PESTLE, Stakeholder Analysis, CATWOE.</li>
+                        <li>Importance of understanding context, stakeholders, and perspectives.</li>
+                        <li>How these analyses feed into later BA activities.</li>
+                        <li>Value of collaborative analysis.</li>
+                    </ul>
+                    <p class="mt-6 text-lg font-semibold">Thank you for your active participation and insightful contributions!</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <div id="twistModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button" onclick="closeTwistModal()">&times;</span>
+            <h2 class="text-2xl font-bold text-red-600 mb-4">⚽️ A Twist in the Tale! ⚽️</h2>
+            <div id="twistContent">
+                </div>
+            <p class="mt-4 font-semibold">Team Task (Discuss for 5 mins):</p>
+            <ul class="list-disc list-inside text-sm space-y-1">
+                <li>How does this twist impact your PESTLE analysis?</li>
+                <li>How does it affect your stakeholder map and priorities?</li>
+                <li>Be ready to briefly mention this in your presentations.</li>
+            </ul>
+            <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg" onclick="closeTwistModal()">Close and Discuss</button>
+        </div>
+    </div>
+
+    <div class="timer-container">
+        <div id="timerDisplay" class="timer-display">00:00</div>
+        <div class="timer-controls">
+            <button onclick="setTimer(30)">PESTLE (30m)</button>
+            <button onclick="setTimer(25)">Stakeholder (25m)</button>
+            <button onclick="setTimer(30, true)">CATWOE (30m)</button> <button onclick="pauseTimer()">Pause</button>
+            <button onclick="resetTimer()">Reset</button>
+        </div>
+        <input type="number" id="customTime" placeholder="Mins" class="mt-2 p-1 rounded text-slate-800 w-20 text-center">
+        <button onclick="startCustomTimer()" class="bg-emerald-500 hover:bg-emerald-600">Start Custom</button>
+    </div>
+
+<script>
+    // Tab navigation
+    function showTab(tabName, element) {
+        const contents = document.querySelectorAll('.tab-content');
+        contents.forEach(content => content.classList.remove('active'));
+        document.getElementById(tabName).classList.add('active');
+
+        const links = document.querySelectorAll('.sidebar-link');
+        links.forEach(link => link.classList.remove('active'));
+        if (element) {
+            element.classList.add('active');
+        }
+        // Scroll to top of main content on tab change for better UX on mobile
+        document.querySelector('main').scrollTop = 0;
+    }
+
+    // Accordion functionality
+    function toggleAccordion(headerElement) {
+        const content = headerElement.nextElementSibling;
+        const arrow = headerElement.querySelector('.arrow');
+        content.classList.toggle('open');
+        if (content.classList.contains('open')) {
+            arrow.style.transform = 'rotate(180deg)'; // Up arrow
+        } else {
+            arrow.style.transform = 'rotate(0deg)'; // Down arrow
+        }
+    }
+    
+    // Initialize first tab
+    document.addEventListener('DOMContentLoaded', () => {
+        showTab('home', document.querySelector('.sidebar-link')); // Show home tab by default
+        // Initialize all accordions to be closed
+        document.querySelectorAll('.accordion-content').forEach(content => {
+            content.classList.remove('open');
+            const arrow = content.previousElementSibling.querySelector('.arrow');
+            if (arrow) arrow.style.transform = 'rotate(0deg)';
+        });
+    });
+
+    // Twist Modal
+    const twistModal = document.getElementById('twistModal');
+    const twistContentEl = document.getElementById('twistContent');
+    const twists = [
+        {
+            title: "Twist 1: Major Funder Pulls Out!",
+            description: "Breaking News: One of the primary private investors (£5 million commitment) for the stadium project has unexpectedly withdrawn their support due to an internal financial crisis."
+        },
+        {
+            title: "Twist 2: Rival Club Announcement!",
+            description: "Local rivals, 'Harrow Hornets FC', also in the National League, announce plans for a significant upgrade to their existing stadium, including new community facilities, just 5 miles from Barnet's proposed site."
+        }
+    ];
+    let currentTwist = twists[Math.floor(Math.random() * twists.length)]; // Select a random twist
+
+    function openTwistModal() {
+        twistContentEl.innerHTML = `
+            <h3 class="text-xl font-semibold text-red-500 mb-2">${currentTwist.title}</h3>
+            <p>${currentTwist.description}</p>
+        `;
+        twistModal.style.display = 'block';
+    }
+
+    function closeTwistModal() {
+        twistModal.style.display = 'none';
+    }
+
+    // Close modal if user clicks outside of it
+    window.onclick = function(event) {
+        if (event.target == twistModal) {
+            closeTwistModal();
+        }
+    }
+
+    // Timer functionality
+    let timerInterval;
+    let timeLeft = 0; // in seconds
+    const timerDisplay = document.getElementById('timerDisplay');
+    let initialTimeSet = 0; // To store the initial time for reset
+
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${minutes.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+    }
+
+    function startTimer() {
+        clearInterval(timerInterval); // Clear any existing timer
+        if (timeLeft <= 0 && initialTimeSet > 0) { // If timer ended and we want to restart with initial
+             timeLeft = initialTimeSet;
+        } else if (timeLeft <= 0) { // If no time is set or left
+            return;
+        }
+
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            timerDisplay.textContent = formatTime(timeLeft);
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                timerDisplay.textContent = "Time's Up!";
+                // Optional: Play a sound
+                // new Audio('path/to/sound.mp3').play();
+            }
+        }, 1000);
+    }
+    
+    function setTimer(minutes, isSecondThirtyMin = false) {
+        // isSecondThirtyMin is a hacky way to differentiate two 30min buttons if needed for specific logic,
+        // but for now, it just sets the time.
+        pauseTimer(); // Pause any current timer
+        timeLeft = minutes * 60;
+        initialTimeSet = timeLeft; // Store the initial time
+        timerDisplay.textContent = formatTime(timeLeft);
+        startTimer();
+    }
+
+    function startCustomTimer() {
+        const customMinutes = parseInt(document.getElementById('customTime').value);
+        if (isNaN(customMinutes) || customMinutes <= 0) {
+            alert("Please enter a valid number of minutes.");
+            return;
+        }
+        setTimer(customMinutes);
+    }
+
+    function pauseTimer() {
+        clearInterval(timerInterval);
+    }
+
+    function resetTimer() {
+        clearInterval(timerInterval);
+        if (initialTimeSet > 0) {
+            timeLeft = initialTimeSet; // Reset to the last set initial time
+        } else {
+            timeLeft = 0; // Or reset to 0 if no initial time was set
+        }
+        timerDisplay.textContent = formatTime(timeLeft);
+    }
+
+</script>
+
+</body>
+</html>
