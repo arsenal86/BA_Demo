@@ -94,25 +94,47 @@
         .accordion-content.open {
             display: block;
         }
+        /* Add these styles to your existing CSS */
         .timer-container {
             position: fixed;
             bottom: 20px;
             right: 20px;
             background-color: #1f2937; /* gray-800 */
             color: white;
-            padding: 1rem 1.5rem;
+            padding: 1rem;
             border-radius: 0.5rem;
             box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
             z-index: 50;
-            text-align: center;
+            max-width: 300px;
+            width: auto;
         }
         .timer-display {
-            font-size: 2rem;
+            font-size: 1.75rem; /* Adjusted from 2rem to fit better with new layout */
             font-weight: bold;
-            margin-bottom: 0.5rem;
+             /* margin-bottom: 0.5rem; Removed as header structure changed */
         }
-        .timer-controls button {
-            background-color: #3b82f6; /* blue-500 */
+        .timer-controls-panel {
+            transition: max-height 0.3s ease-out;
+            overflow: hidden;
+        }
+        .timer-controls-panel.hidden {
+            max-height: 0;
+            display: none;
+        }
+        .timer-controls-panel:not(.hidden) {
+            display: block; /* Ensure it's block for layout */
+            max-height: 300px; /* Adjust as needed for content */
+        }
+        #toggleTimerControls {
+            transition: transform 0.3s ease;
+        }
+        #timerControlsIcon {
+            display: inline-block; /* Ensures transform works as expected */
+            transition: transform 0.3s ease;
+        }
+        /* Existing timer-controls button styling - ensure it's not conflicting or remove if not needed */
+        /* .timer-controls button {
+            background-color: #3b82f6; 
             color: white;
             padding: 0.5rem 1rem;
             border: none;
@@ -121,8 +143,9 @@
             cursor: pointer;
         }
         .timer-controls button:hover {
-            background-color: #2563eb; /* blue-600 */
-        }
+            background-color: #2563eb; 
+        } */
+
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800">
@@ -475,15 +498,25 @@
     </div>
 
     <div class="timer-container">
-        <div id="timerDisplay" class="timer-display">00:00</div>
-        <div class="timer-controls">
-            <button onclick="setTimer(30)">PESTLE (30m)</button>
-            <button onclick="setTimer(25)">Stakeholder (25m)</button>
-            <button onclick="setTimer(30, true)">CATWOE (30m)</button> <button onclick="pauseTimer()">Pause</button>
-            <button onclick="resetTimer()">Reset</button>
+        <div class="timer-header flex justify-between items-center mb-2">
+            <div id="timerDisplay" class="timer-display">00:00</div>
+            <button id="toggleTimerControls" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded-md text-sm">
+                <span id="timerControlsIcon">▼</span>
+            </button>
         </div>
-        <input type="number" id="customTime" placeholder="Mins" class="mt-2 p-1 rounded text-slate-800 w-20 text-center">
-        <button onclick="startCustomTimer()" class="bg-emerald-500 hover:bg-emerald-600">Start Custom</button>
+        <div id="timerControlsPanel" class="timer-controls-panel hidden">
+            <div class="grid grid-cols-2 gap-2 mb-2">
+                <button onclick="setTimer(30)" class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm">PESTLE (30m)</button>
+                <button onclick="setTimer(25)" class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm">Stakeholder (25m)</button>
+                <button onclick="setTimer(30, true)" class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm">CATWOE (30m)</button>
+                <button onclick="pauseTimer()" class="bg-amber-500 hover:bg-amber-600 text-white py-2 px-3 rounded text-sm">Pause</button>
+                <button onclick="resetTimer()" class="bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded text-sm">Reset</button>
+                <button onclick="startCustomTimer()" class="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-3 rounded text-sm">Custom</button>
+            </div>
+            <div class="flex gap-2">
+                <input type="number" id="customTime" placeholder="Mins" class="p-1 rounded text-slate-800 w-full text-center">
+            </div>
+        </div>
     </div>
 
 <script>
@@ -559,6 +592,23 @@
         }
     }
 
+    // Add this to your existing JavaScript, replacing any duplicate functions
+    // Toggle timer controls visibility
+    document.getElementById('toggleTimerControls').addEventListener('click', function() {
+        const controlsPanel = document.getElementById('timerControlsPanel');
+        const icon = document.getElementById('timerControlsIcon');
+                
+        controlsPanel.classList.toggle('hidden');
+                
+        if (controlsPanel.classList.contains('hidden')) {
+            icon.textContent = '▼';
+            icon.style.transform = 'rotate(0deg)';
+        } else {
+            icon.textContent = '▲';
+            icon.style.transform = 'rotate(180deg)';
+        }
+    });
+
     // Timer functionality
     let timerInterval;
     let timeLeft = 0; // in seconds
@@ -576,6 +626,8 @@
         if (timeLeft <= 0 && initialTimeSet > 0) { // If timer ended and we want to restart with initial
              timeLeft = initialTimeSet;
         } else if (timeLeft <= 0) { // If no time is set or left
+            // Update display to 00:00 if no time is set/left, instead of just returning
+            timerDisplay.textContent = formatTime(0); 
             return;
         }
 
@@ -602,12 +654,14 @@
     }
 
     function startCustomTimer() {
-        const customMinutes = parseInt(document.getElementById('customTime').value);
+        const customMinutesInput = document.getElementById('customTime');
+        const customMinutes = parseInt(customMinutesInput.value);
         if (isNaN(customMinutes) || customMinutes <= 0) {
             alert("Please enter a valid number of minutes.");
             return;
         }
         setTimer(customMinutes);
+        customMinutesInput.value = ''; // Clear input after setting
     }
 
     function pauseTimer() {
@@ -622,8 +676,12 @@
             timeLeft = 0; // Or reset to 0 if no initial time was set
         }
         timerDisplay.textContent = formatTime(timeLeft);
+        // If you want the timer to restart on reset, call startTimer()
+        // startTimer(); 
+        // If you want it to just show the reset time and stay paused, do nothing more.
     }
-
+    // Initialize timer display
+    timerDisplay.textContent = formatTime(timeLeft); 
 </script>
 
 </body>
