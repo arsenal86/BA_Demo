@@ -7,13 +7,13 @@
     <link href="style.css" rel="stylesheet">
     <script src="script.js" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Montserrat is now the default font, defined in tailwind.config.js and style.css -->
 </head>
-<body class="bg-slate-50 text-slate-800">
+<body class="bg-accent-white text-text-dark-grey">
 
     <div class="flex flex-col md:flex-row min-h-screen">
         <aside class="w-full md:w-64 bg-white shadow-lg p-6 space-y-2 sticky top-0 h-screen md:overflow-y-auto">
-            <h1 class="text-2xl font-bold text-sky-600 mb-6">Barnet FC Workshop</h1>
+            <h1 class="text-2xl font-bold text-primary-orange mb-6">Barnet FC Workshop</h1>
             <nav>
                 <a href="#" class="sidebar-link active" onclick="showTab('home', this)">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 inline-block mr-2" viewBox="0 0 20 20" fill="currentColor"><path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" /></svg>
@@ -49,12 +49,12 @@
         <main class="flex-1 p-6 md:p-10 overflow-y-auto">
             <div id="home" class="tab-content active">
                 <div class="card">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Welcome to the Barnet FC Homecoming BA Workshop!</h2>
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">Welcome to the Barnet FC Homecoming BA Workshop!</h2>
                     <p class="text-lg mb-3">This interactive session is designed to give you hands-on experience applying key Business Analysis frameworks to a realistic scenario.</p>
                     <p class="text-lg font-semibold mb-2">Workshop Goal:</p>
                     <p class="mb-4">To collaboratively analyze Barnet FC's planned return to their home borough, using PESTLE, Stakeholder Analysis, and CATWOE, fostering critical thinking and shared learning.</p>
                     <hr class="my-6">
-                    <h3 class="text-2xl font-semibold text-sky-600 mb-3">Today's Game Plan (Agenda)</h3>
+                    <h3 class="text-2xl font-semibold text-text-dark-grey mb-3">Today's Game Plan (Agenda)</h3>
                     <ul class="list-disc list-inside space-y-2 mb-4">
                         <li>Introduction & Team Formation (5 mins)</li>
                         <li>Section 1: External Environment – PESTLE Analysis (30 mins)</li>
@@ -63,7 +63,7 @@
                         <li>Team Presentations & Discussion (15 mins)</li>
                         <li>Wrap-up & Key Learnings (5 mins)</li>
                     </ul>
-                    <button class="bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('scenario', document.querySelector('a[onclick*=\'scenario\']'))">
+                    <button class="bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('scenario', document.querySelector('a[onclick*=\'scenario\']'))">
                         Let's Get Started: View Scenario
                     </button>
                 </div>
@@ -71,11 +71,11 @@
 
             <div id="scenario" class="tab-content">
                 <div class="card">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">The Scenario: Barnet FC – The Bees' Return</h2>
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">The Scenario: Barnet FC – The Bees' Return</h2>
                     <p class="mb-3">Barnet FC, affectionately known as "The Bees," boasts a rich history, having played at their iconic Underhill Stadium in the London Borough of Barnet for 106 years. In 2013, due to various constraints with Underhill, the club relocated to The Hive Stadium in the neighboring borough of Harrow. While The Hive has served as a functional home, the emotional and historical ties to Barnet remain strong amongst the fanbase and local community.</p>
                     <p class="mb-3">After a decade away, Barnet FC's leadership has announced an ambitious strategic initiative: to return to the London Borough of Barnet by developing a new, purpose-built stadium. This project, with an estimated budget of £25 million and a proposed 3-year timeline, is more than just a construction project; it's a symbol of homecoming, community regeneration, and a new chapter for the club, which currently competes in the National League (the fifth tier of English football).</p>
                     <p class="mb-3">The move is fraught with complexities: securing planning permissions, community engagement, financial viability, managing supporter expectations, and ensuring the new stadium meets modern standards while respecting the club's heritage. Success will depend on meticulous planning, robust analysis, and effective stakeholder management.</p>
-                    <h3 class="text-xl font-semibold mt-6 mb-2">Project Snapshot:</h3>                    <ul class="list-disc list-inside space-y-1">
+                    <h3 class="text-xl font-semibold text-text-dark-grey mt-6 mb-2">Project Snapshot:</h3>                    <ul class="list-disc list-inside space-y-1">
                         <li><strong>Budget:</strong> £25 million</li>
                         <li><strong>Timeline:</strong> 3 years</li>
                         <li><strong>Current League:</strong> National League CHAMPIONS</li>
@@ -84,9 +84,9 @@
                         <iframe width="560" height="315" src="https://www.youtube.com/embed/OMxBdVvULFc?si=8ygybBKr6zADa1qx" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
                     </div>
                     <div class="mt-6 p-4 bg-yellow-100 border-l-4 border-yellow-400 rounded">
-                        <strong>Disclaimer:</strong> The content on this website, including all scenarios and characters, has been generated by artificial intelligence and is based on the subject of the Barnet Move. This site and its content are not associated with, endorsed by, or connected in any official capacity to the Bring Barnet Home Campaign. The characters portrayed within this scenario are entirely fictional. Any similarity to actual persons, living or deceased, is unintentional and coincidental. To access information about the official Bring Barnet Home Campaign, please visit their website at <a href="https://www.bringbarnetback.com/" class="underline text-blue-700" target="_blank" rel="noopener">https://www.bringbarnetback.com/</a>.
+                        <strong>Disclaimer:</strong> The content on this website, including all scenarios and characters, has been generated by artificial intelligence and is based on the subject of the Barnet Move. This site and its content are not associated with, endorsed by, or connected in any official capacity to the Bring Barnet Home Campaign. The characters portrayed within this scenario are entirely fictional. Any similarity to actual persons, living or deceased, is unintentional and coincidental. To access information about the official Bring Barnet Home Campaign, please visit their website at <a href="https://www.bringbarnetback.com/" class="underline text-primary-orange hover:text-orange-700" target="_blank" rel="noopener">https://www.bringbarnetback.com/</a>.
                     </div>
-                    <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('pestle', document.querySelector('a[onclick*=\'pestle\']'))">
+                    <button class="mt-6 bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('pestle', document.querySelector('a[onclick*=\'pestle\']'))">
                         Next: PESTLE Analysis
                     </button>
                 </div>
@@ -94,18 +94,18 @@
 
             <div id="pestle" class="tab-content">
                 <div class="card">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Section 1: PESTLE Analysis (30 mins)</h2>
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">Section 1: PESTLE Analysis (30 mins)</h2>
                     <p class="text-lg mb-3"><strong>Objective:</strong> To identify and analyze the key external macro-environmental factors that could influence Barnet FC's stadium relocation project.</p>
                     <p class="mb-4"><strong>Your Task:</strong> In your teams, brainstorm and document factors under each PESTLE category. Identify at least 2-3 distinct factors per category, explaining their potential impact. Use your flip chart or digital whiteboard.</p>
                     
                     <div class="space-y-3">
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="font-semibold text-lg">P - Political</span>
+                                <span class="font-semibold text-lg text-text-dark-grey">P - Political</span>
                                 <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span> </div>
                             <div class="accordion-content">
-                                <p class="font-medium mb-1">Prompting Questions:</p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                <p class="font-medium mb-1 text-text-dark-grey">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2 text-text-dark-grey">
                                     <li>How might local council elections or changes in political leadership impact planning permissions?</li>
                                     <li>What national government policies on sports infrastructure or funding could affect the project?</li>
                                 </ul>
@@ -115,12 +115,12 @@
                         </div>
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="font-semibold text-lg">E - Economic</span>
+                                <span class="font-semibold text-lg text-text-dark-grey">E - Economic</span>
                                 <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
                             </div>
                             <div class="accordion-content">
-                                <p class="font-medium mb-1">Prompting Questions:</p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                <p class="font-medium mb-1 text-text-dark-grey">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2 text-text-dark-grey">
                                     <li>How might the current economic climate (inflation, construction costs) impact the £25 million budget?</li>
                                     <li>What are potential economic benefits for the local Barnet area?</li>
                                 </ul>
@@ -130,12 +130,12 @@
                         </div>
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="font-semibold text-lg">S - Social</span>
+                                <span class="font-semibold text-lg text-text-dark-grey">S - Social</span>
                                 <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
                             </div>
                             <div class="accordion-content">
-                                <p class="font-medium mb-1">Prompting Questions:</p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                <p class="font-medium mb-1 text-text-dark-grey">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2 text-text-dark-grey">
                                     <li>What is the current sentiment of the Barnet community towards the club's return?</li>
                                     <li>How might demographic shifts influence stadium design/services?</li>
                                     <li>Are there concerns about disruption, traffic, or noise?</li>
@@ -146,12 +146,12 @@
                         </div>
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="font-semibold text-lg">T - Technological</span>
+                                <span class="font-semibold text-lg text-text-dark-grey">T - Technological</span>
                                 <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
                             </div>
                             <div class="accordion-content">
-                                <p class="font-medium mb-1">Prompting Questions:</p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                <p class="font-medium mb-1 text-text-dark-grey">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2 text-text-dark-grey">
                                     <li>What modern stadium technologies should be considered (cashless, Wi-Fi, sustainability)?</li>
                                     <li>How can technology enhance fan engagement?</li>
                                 </ul>
@@ -161,12 +161,12 @@
                         </div>
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="font-semibold text-lg">L - Legal</span>
+                                <span class="font-semibold text-lg text-text-dark-grey">L - Legal</span>
                                 <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
                             </div>
                             <div class="accordion-content">
-                                <p class="font-medium mb-1">Prompting Questions:</p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                <p class="font-medium mb-1 text-text-dark-grey">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2 text-text-dark-grey">
                                     <li>What are key planning permission requirements and potential legal hurdles?</li>
                                     <li>Are there specific safety/accessibility regulations for new sports venues?</li>
                                 </ul>
@@ -176,12 +176,12 @@
                         </div>
                         <div class="accordion-item">
                             <div class="accordion-header" onclick="toggleAccordion(this)">
-                                <span class="font-semibold text-lg">E - Environmental</span>
+                                <span class="font-semibold text-lg text-text-dark-grey">E - Environmental</span>
                                 <span class="arrow text-xl transform transition-transform duration-300">&#9660;</span>
                             </div>
                             <div class="accordion-content">
-                                <p class="font-medium mb-1">Prompting Questions:</p>
-                                <ul class="list-disc list-inside text-sm space-y-1 mb-2">
+                                <p class="font-medium mb-1 text-text-dark-grey">Prompting Questions:</p>
+                                <ul class="list-disc list-inside text-sm space-y-1 mb-2 text-text-dark-grey">
                                     <li>What are environmental considerations (green building, waste, wildlife)?</li>
                                     <li>How can the club demonstrate commitment to sustainability?</li>
                                 </ul>
@@ -190,7 +190,7 @@
                             </div>
                         </div>
                     </div>
-                    <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('stakeholder', document.querySelector('a[onclick*=\'stakeholder\']'))">
+                    <button class="mt-6 bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('stakeholder', document.querySelector('a[onclick*=\'stakeholder\']'))">
                         Next: Stakeholder Analysis
                     </button>
                 </div>
@@ -198,7 +198,7 @@
 
             <div id="stakeholder" class="tab-content">
                 <div class="card">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Section 2: Stakeholder Analysis (25 mins)</h2>
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">Section 2: Stakeholder Analysis (25 mins)</h2>
                     <p class="text-lg mb-3"><strong>Objective:</strong> To identify key stakeholders, understand their perspectives, and prioritize them based on their influence and interest.</p>
                     <p class="mb-1"><strong>Activity Steps:</strong></p>
                     <ol class="list-decimal list-inside space-y-1 mb-4">
@@ -208,82 +208,82 @@
                         <li>Briefly discuss engagement approaches for these top 3.</li>
                     </ol>
 
-                    <h3 class="text-xl font-semibold text-sky-600 mb-3">Stakeholder Personas:</h3>
+                    <h3 class="text-xl font-semibold text-text-dark-grey mb-3">Stakeholder Personas:</h3>
                     <div class="grid md:grid-cols-2 gap-4">
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">1. Sarah Chen (Local Resident)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Quiet neighborhood, property values, minimal disruption.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Noise, parking, anti-social behavior.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">1. Sarah Chen (Local Resident)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Quiet neighborhood, property values, minimal disruption.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Noise, parking, anti-social behavior.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Medium.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">2. David Miller (Barnet FC CEO)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Successful relocation, financial viability, club legacy.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Budget overruns, delays, negative PR.</p>
-                            <p class="text-sm"><strong>Influence:</strong> High.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">2. David Miller (Barnet FC CEO)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Successful relocation, financial viability, club legacy.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Budget overruns, delays, negative PR.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> High.</p>
                         </div>
-                         <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">3. Cllr. James Wilson (Barnet Council Leader)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Economic regeneration, job creation, positive council image.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Public backlash, project failure, strain on services.</p>
-                            <p class="text-sm"><strong>Influence:</strong> High.</p>
+                         <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">3. Cllr. James Wilson (Barnet Council Leader)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Economic regeneration, job creation, positive council image.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Public backlash, project failure, strain on services.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> High.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">4. Mark Jenkins (Long-time Season Ticket Holder)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Club returning home, match-day experience, club success.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Ticket prices, stadium atmosphere, accessibility.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">4. Mark Jenkins (Long-time Season Ticket Holder)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Club returning home, match-day experience, club success.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Ticket prices, stadium atmosphere, accessibility.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Medium.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">5. Fatima Ahmed (Local Business Owner)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Increased footfall, new customers.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Increased local business rates, construction disruption.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Low-Medium.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">5. Fatima Ahmed (Local Business Owner)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Increased footfall, new customers.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Increased local business rates, construction disruption.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Low-Medium.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">6. John Bishop (Motorway Services Action Group)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Smooth traffic flow, minimal congestion.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Match-day traffic overwhelming local roads.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">6. John Bishop (Motorway Services Action Group)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Smooth traffic flow, minimal congestion.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Match-day traffic overwhelming local roads.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Medium.</p>
                         </div>
-                         <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">7. Maria Sanchez (National League Rep)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Compliance with ground grading, club stability.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Project delays, club financial health.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                         <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">7. Maria Sanchez (National League Rep)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Compliance with ground grading, club stability.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Project delays, club financial health.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Medium.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">8. Kevin Beale (Construction PM)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Project on time/budget, reputation.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Unforeseen conditions, supply chain, scope creep.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">8. Kevin Beale (Construction PM)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Project on time/budget, reputation.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Unforeseen conditions, supply chain, scope creep.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Medium.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">9. "The Barnet Buzz" (Fan Forum Mod)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Transparency, fan consultation.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Club not listening, mismanagement.</p>
-                            <p class="text-sm"><strong>Influence:</strong> Medium.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">9. "The Barnet Buzz" (Fan Forum Mod)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Transparency, fan consultation.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Club not listening, mismanagement.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> Medium.</p>
                         </div>
-                        <div class="p-4 border rounded-lg bg-slate-100">
-                            <h4 class="font-bold">10. Eleanor Hayes (Environmental Officer)</h4>
-                            <p class="text-sm"><strong>Interests:</strong> Protecting ecology, sustainable development.</p>
-                            <p class="text-sm"><strong>Concerns:</strong> Impact on wildlife, pollution, waste.</p>
-                            <p class="text-sm"><strong>Influence:</strong> High.</p>
+                        <div class="p-4 border rounded-lg bg-gray-100">
+                            <h4 class="font-bold text-accent-black">10. Eleanor Hayes (Environmental Officer)</h4>
+                            <p class="text-sm text-text-dark-grey"><strong>Interests:</strong> Protecting ecology, sustainable development.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Concerns:</strong> Impact on wildlife, pollution, waste.</p>
+                            <p class="text-sm text-text-dark-grey"><strong>Influence:</strong> High.</p>
                         </div>
                     </div>
-                    <h3 class="text-xl font-semibold text-sky-600 mt-6 mb-3">Interest/Influence Grid:</h3>
-                    <p class="mb-2">Use your handout or draw a 2x2 grid. Label axes "Interest" (Low to High) and "Influence" (Low to High). Plot stakeholders into: </p>
-                    <ul class="list-disc list-inside space-y-1 mb-4 text-sm">
+                    <h3 class="text-xl font-semibold text-text-dark-grey mt-6 mb-3">Interest/Influence Grid:</h3>
+                    <p class="mb-2 text-text-dark-grey">Use your handout or draw a 2x2 grid. Label axes "Interest" (Low to High) and "Influence" (Low to High). Plot stakeholders into: </p>
+                    <ul class="list-disc list-inside space-y-1 mb-4 text-sm text-text-dark-grey">
                         <li><strong>High Influence / High Interest:</strong> Manage Closely</li>
                         <li><strong>High Influence / Low Interest:</strong> Keep Satisfied</li>
                         <li><strong>Low Influence / High Interest:</strong> Keep Informed</li>
                         <li><strong>Low Influence / Low Interest:</strong> Monitor</li>
                     </ul>
-                    <p class="font-semibold">Remember to identify your Top 3 critical stakeholders for the next section!</p>
-                     <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="openTwistModal()">
+                    <p class="font-semibold text-text-dark-grey">Remember to identify your Top 3 critical stakeholders for the next section!</p>
+                     <button class="mt-6 bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="openTwistModal()">
                         Ready for a Twist?
                     </button>
-                    <button class="mt-6 ml-4 bg-green-500 hover:bg-green-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('catwoe', document.querySelector('a[onclick*=\'catwoe\']'))">
+                    <button class="mt-6 ml-4 bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('catwoe', document.querySelector('a[onclick*=\'catwoe\']'))">
                         Proceed to CATWOE Analysis
                     </button>
                 </div>
@@ -291,12 +291,12 @@
 
             <div id="catwoe" class="tab-content">
                 <div class="card">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Section 3: CATWOE Analysis (30 mins)</h2>
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">Section 3: CATWOE Analysis (30 mins)</h2>
                     <p class="text-lg mb-3"><strong>Objective:</strong> To analyze the perspectives and needs of your Top 3 critical stakeholders, providing deeper understanding for requirements elicitation.</p>
                     <p class="mb-4"><strong>Your Task:</strong> For EACH of your Top 3 stakeholders identified in the previous section, conduct a CATWOE analysis using your template/whiteboard.</p>
 
-                    <h3 class="text-xl font-semibold text-sky-600 mb-3">The CATWOE Framework:</h3>
-                    <ul class="space-y-2 mb-4">
+                    <h3 class="text-xl font-semibold text-text-dark-grey mb-3">The CATWOE Framework:</h3>
+                    <ul class="space-y-2 mb-4 text-text-dark-grey">
                         <li><strong>C (Customers/Clients):</strong> Who benefits or suffers from the transformation (from this stakeholder's POV)?</li>
                         <li><strong>A (Actors):</strong> Who carries out the activities in the transformation (from this stakeholder's POV)?</li>
                         <li><strong>T (Transformation Process):</strong> What's the core change? (Input -> Output, e.g., undeveloped land -> community asset).</li>
@@ -304,12 +304,12 @@
                         <li><strong>O (Owners):</strong> Who has ultimate authority to approve/stop it (from this stakeholder's POV)?</li>
                         <li><strong>E (Environmental Constraints):</strong> What external factors impact it? (Link to PESTLE).</li>
                     </ul>
-                    <h4 class="font-semibold mb-2">Example Questions (for David Miller, Barnet FC CEO):</h4>
-                    <ul class="list-disc list-inside text-sm space-y-1 mb-4">
+                    <h4 class="font-semibold mb-2 text-text-dark-grey">Example Questions (for David Miller, Barnet FC CEO):</h4>
+                    <ul class="list-disc list-inside text-sm space-y-1 mb-4 text-text-dark-grey">
                         <li><strong>C:</strong> Who ultimately benefits if this relocation is a success from his perspective? Who suffers if it fails?</li>
                         <li><strong>W:</strong> What's his core belief driving this? ("A new stadium is essential for the club's long-term survival and growth").</li>
                     </ul>
-                     <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('presentations', document.querySelector('a[onclick*=\'presentations\']'))">
+                     <button class="mt-6 bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-3 px-6 rounded-lg shadow transition duration-150" onclick="showTab('presentations', document.querySelector('a[onclick*=\'presentations\']'))">
                         Next: Presentations & Wrap-up
                     </button>
                 </div>
@@ -317,31 +317,31 @@
 
             <div id="presentations" class="tab-content">
                 <div class="card">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Team Presentations & Discussion (15 mins)</h2>
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">Team Presentations & Discussion (15 mins)</h2>
                     <p class="text-lg mb-3">Each team will have 3-4 minutes to share key insights.</p>
-                    <h3 class="text-xl font-semibold text-sky-600 mb-2">Presentation Focus:</h3>
-                    <ul class="list-disc list-inside space-y-1 mb-4">
+                    <h3 class="text-xl font-semibold text-text-dark-grey mb-2">Presentation Focus:</h3>
+                    <ul class="list-disc list-inside space-y-1 mb-4 text-text-dark-grey">
                         <li>1 key PESTLE insight.</li>
                         <li>Your Top 3 critical stakeholders and why.</li>
                         <li>Key insights from one CATWOE analysis.</li>
                         <li>One major challenge or "aha!" moment (and impact of the twist, if applicable).</li>
                     </ul>
 
-                    <h3 class="text-xl font-semibold text-sky-600 mt-6 mb-2">Discussion Prompts:</h3>
-                    <ul class="list-disc list-inside space-y-1 mb-4">
+                    <h3 class="text-xl font-semibold text-text-dark-grey mt-6 mb-2">Discussion Prompts:</h3>
+                    <ul class="list-disc list-inside space-y-1 mb-4 text-text-dark-grey">
                         <li>What were the most common critical stakeholders identified? Why?</li>
                         <li>Which PESTLE factor seemed most impactful across teams?</li>
                         <li>How do these analyses help in a real project?</li>
                     </ul>
                     <hr class="my-6">
-                    <h2 class="text-3xl font-semibold text-sky-700 mb-4">Wrap-up & Key Learnings (5 mins)</h2>
-                     <ul class="list-disc list-inside space-y-1">
+                    <h2 class="text-3xl font-semibold text-accent-black mb-4">Wrap-up & Key Learnings (5 mins)</h2>
+                     <ul class="list-disc list-inside space-y-1 text-text-dark-grey">
                         <li>Recap of frameworks: PESTLE, Stakeholder Analysis, CATWOE.</li>
                         <li>Importance of understanding context, stakeholders, and perspectives.</li>
                         <li>How these analyses feed into later BA activities.</li>
                         <li>Value of collaborative analysis.</li>
                     </ul>
-                    <p class="mt-6 text-lg font-semibold">Thank you for your active participation and insightful contributions!</p>
+                    <p class="mt-6 text-lg font-semibold text-text-dark-grey">Thank you for your active participation and insightful contributions!</p>
                 </div>
             </div>
         </main>
@@ -359,34 +359,34 @@
                 <li>How does it affect your stakeholder map and priorities?</li>
                 <li>Be ready to briefly mention this in your presentations.</li>
             </ul>
-            <button class="mt-6 bg-sky-500 hover:bg-sky-600 text-white font-semibold py-2 px-4 rounded-lg" onclick="closeTwistModal()">Close and Discuss</button>
+            <button class="mt-6 bg-primary-orange hover:bg-orange-700 text-accent-white font-semibold py-2 px-4 rounded-lg" onclick="closeTwistModal()">Close and Discuss</button>
         </div>
     </div>
 
     <div class="timer-container">
         <div class="timer-header flex justify-between items-center mb-2">
             <div id="timerDisplay" class="timer-display">00:00</div>
-            <button id="toggleTimerControls" class="bg-slate-700 hover:bg-slate-600 text-white px-3 py-1 rounded-md text-sm">
+            <button id="toggleTimerControls" class="bg-neutral-700 hover:bg-neutral-600 text-accent-white px-3 py-1 rounded-md text-sm">
                 <span id="timerControlsIcon">▼</span>
             </button>
         </div>
         <div id="timerControlsPanel" class="timer-controls-panel hidden">
             <div class="grid grid-cols-2 gap-2 mb-2">
-                <button onclick="setTimer(30)" class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm">PESTLE (30m)</button>
-                <button onclick="setTimer(25)" class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm">Stakeholder (25m)</button>
-                <button onclick="setTimer(30, true)" class="bg-sky-500 hover:bg-sky-600 text-white py-2 px-3 rounded text-sm">CATWOE (30m)</button>
-                <button onclick="pauseTimer()" class="bg-amber-500 hover:bg-amber-600 text-white py-2 px-3 rounded text-sm">Pause</button>
-                <button onclick="resetTimer()" class="bg-red-500 hover:bg-red-600 text-white py-2 px-3 rounded text-sm">Reset</button>
-                <button onclick="startCustomTimer()" class="bg-emerald-500 hover:bg-emerald-600 text-white py-2 px-3 rounded text-sm">Custom</button>
+                <button onclick="setTimer(30)" class="bg-primary-orange hover:bg-orange-700 text-accent-white py-2 px-3 rounded text-sm">PESTLE (30m)</button>
+                <button onclick="setTimer(25)" class="bg-primary-orange hover:bg-orange-700 text-accent-white py-2 px-3 rounded text-sm">Stakeholder (25m)</button>
+                <button onclick="setTimer(30, true)" class="bg-primary-orange hover:bg-orange-700 text-accent-white py-2 px-3 rounded text-sm">CATWOE (30m)</button>
+                <button onclick="pauseTimer()" class="bg-gray-500 hover:bg-gray-600 text-accent-white py-2 px-3 rounded text-sm">Pause</button>
+                <button onclick="resetTimer()" class="bg-red-500 hover:bg-red-600 text-accent-white py-2 px-3 rounded text-sm">Reset</button>
+                <button onclick="startCustomTimer()" class="bg-teal-500 hover:bg-teal-600 text-accent-white py-2 px-3 rounded text-sm">Custom</button>
             </div>
             <div class="flex gap-2">
-                <input type="number" id="customTime" placeholder="Mins" class="p-1 rounded text-slate-800 w-full text-center">
+                <input type="number" id="customTime" placeholder="Mins" class="p-1 rounded text-text-dark-grey w-full text-center">
             </div>
         </div>
     </div>
 
     <!-- Watermark at the bottom of the site -->
-<footer class="w-full text-center text-xs text-slate-400 py-4 mt-8">
+<footer class="w-full text-center text-xs text-gray-500 py-4 mt-8">
     (C) Marc Debenham 2025
 </footer>
 

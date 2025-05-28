@@ -1,6 +1,6 @@
 /* style.css - extracted from index.html */
 body {
-    font-family: 'Inter', sans-serif;
+    font-family: 'Montserrat', 'Arial', sans-serif;
     scroll-behavior: smooth;
 }
 .tab-content { display: none; }
@@ -12,12 +12,12 @@ body {
     transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
 }
 .sidebar-link:hover {
-    background-color: #e0f2fe;
-    color: #0c4a6e;
+    background-color: #fff5eb; /* Lighter orange */
+    color: #f58426; /* Primary orange */
 }
 .sidebar-link.active {
-    background-color: #0ea5e9;
-    color: white;
+    background-color: #f58426; /* Primary orange */
+    color: #ffffff; /* Accent white */
     font-weight: 600;
 }
 .card {
@@ -39,17 +39,17 @@ body {
     background-color: rgba(0,0,0,0.5);
 }
 .modal-content {
-    background-color: #fefefe;
+    background-color: #ffffff; /* Accent white */
     margin: 10% auto;
     padding: 25px;
-    border: 1px solid #888;
+    border: 1px solid #cccccc; /* Lighter grey border */
     width: 80%;
     max-width: 600px;
     border-radius: 0.5rem;
     position: relative;
 }
 .close-button {
-    color: #aaa;
+    color: #aaaaaa; /* Kept light grey */
     float: right;
     font-size: 28px;
     font-weight: bold;
@@ -59,15 +59,15 @@ body {
 }
 .close-button:hover,
 .close-button:focus {
-    color: black;
+    color: #000000; /* Accent black */
     text-decoration: none;
     cursor: pointer;
 }
 .accordion-header {
     cursor: pointer;
     padding: 1rem;
-    background-color: #f3f4f6;
-    border: 1px solid #e5e7eb;
+    background-color: #f3f4f6; /* Kept light grey, good for neutral UI element */
+    border: 1px solid #e5e7eb; /* Kept light grey border */
     border-radius: 0.375rem;
     margin-bottom: 0.5rem;
     display: flex;
@@ -77,10 +77,10 @@ body {
 .accordion-content {
     display: none;
     padding: 1rem;
-    border: 1px solid #e5e7eb;
+    border: 1px solid #e5e7eb; /* Kept light grey border */
     border-top: none;
     border-radius: 0 0 0.375rem 0.375rem;
-    background-color: #fafafa;
+    background-color: #fafafa; /* Kept very light grey, good for content background */
 }
 .accordion-content.open {
     display: block;
@@ -89,11 +89,11 @@ body {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background-color: #1f2937;
-    color: white;
+    background-color: #333333; /* Text-dark-grey */
+    color: #ffffff; /* Accent white */
     padding: 1rem;
     border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05); /* Kept neutral shadow */
     z-index: 50;
     max-width: 300px;
     width: auto;
