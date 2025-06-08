@@ -1,0 +1,1 @@
+Placeholder for pause-circle.svg. Timer.js expects /icons/pause-circle.svg

@@ -1,0 +1,1 @@
+Placeholder for arrow-clockwise.svg. Timer.js expects /icons/arrow-clockwise.svg

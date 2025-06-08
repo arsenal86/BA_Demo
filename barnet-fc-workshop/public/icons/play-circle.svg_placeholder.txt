@@ -1,0 +1,1 @@
+Placeholder for play-circle.svg. Timer.js expects /icons/play-circle.svg
