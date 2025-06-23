@@ -51,12 +51,11 @@ The workshop includes 10 detailed stakeholder personas representing various inte
 - **Google Fonts**: Inter font family for clean typography
 
 ### File Structure
-```
+
 ├── index.html          # Main application structure
 ├── style.css           # Custom CSS and Tailwind overrides
 ├── script.js           # Interactive functionality
 └── README.md           # Project documentation
-```
 
 ### Key JavaScript Features
 - Tab navigation system
@@ -79,7 +78,7 @@ The workshop includes 10 detailed stakeholder personas representing various inte
 5. Use the timer feature to manage workshop pacing
 
 ### Workshop Facilitation
-- **Duration**: Approximately 110 minutes total
+- **Duration**: Approximately 85 minutes total
 - **Team Size**: 3-5 participants per team recommended
 - **Materials Needed**: Flip charts or digital whiteboard for team work
 - **Preparation**: Review facilitator notes in each section
@@ -89,9 +88,9 @@ The workshop includes 10 detailed stakeholder personas representing various inte
 | Section | Duration | Key Activities |
 |---------|----------|----------------|
 | Introduction & Setup | 5 mins | Team formation, overview |
-| PESTLE Analysis | 30 mins | External environment analysis |
-| Stakeholder Analysis | 25 mins | Stakeholder identification and mapping |
-| CATWOE Analysis | 30 mins | Perspective-based deep dive |
+| PESTLE Analysis | 20 mins | External environment analysis |
+| Stakeholder Analysis | 20 mins | Stakeholder identification and mapping |
+| CATWOE Analysis | 20 mins | Perspective-based deep dive |
 | Presentations | 15 mins | Team sharing and discussion |
 | Wrap-up | 5 mins | Key learnings and reflection |
 
@@ -105,7 +104,7 @@ The workshop includes randomized "twist" scenarios that introduce unexpected cha
 These twists test participants' ability to adapt their analyses to changing circumstances.
 
 ### Timer System
-- **Preset Timers**: PESTLE (30m), Stakeholder (25m), CATWOE (30m)
+- **Preset Timers**: PESTLE (20m), Stakeholder (20m), CATWOE (20m)
 - **Custom Timers**: Set any duration needed
 - **Controls**: Start, pause, reset functionality
 - **Visual Display**: Clear countdown with "Time's Up" notification
