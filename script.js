@@ -235,8 +235,9 @@ function populateContent() {
         const catwoeTab = document.getElementById('catwoe');
         catwoeTab.querySelector('h2').textContent = workshopContent.catwoe.title;
         const catwoeParas = catwoeTab.querySelectorAll('.card > p');
-        catwoeParas[0].innerHTML = workshopContent.catwoe.objective; // innerHTML for safety, though likely no HTML
-        catwoeParas[1].innerHTML = workshopContent.catwoe.task;
+        // Ensure the strong tags for Objective and Task are included
+        catwoeParas[0].innerHTML = `<strong>Objective:</strong> ${workshopContent.catwoe.objective}`;
+        catwoeParas[1].innerHTML = `<strong>Your Task:</strong> ${workshopContent.catwoe.task}`;
 
         const frameworkTitle = catwoeTab.querySelector('h3.text-xl.font-semibold.text-sky-600.mb-3');
         if (frameworkTitle) {
